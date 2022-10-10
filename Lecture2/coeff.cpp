@@ -9,10 +9,11 @@
 */
 
 class CCoeffs{
-public:
     double a;
     double b;
     double c;
+public:
+
     CCoeffs(){
         a = 0;b = 0;c = 0;
     }
@@ -26,17 +27,29 @@ public:
         std::cout<<"a = "<<a<<", b = "<<b<<", c = "<<c<<std::endl;
         return;
     }
+    double get_a(){
+        return a;
+    }
+    double get_b(){
+        return b;
+    }
+    double get_c(){
+        return c;
+    }
 };
 
 void solve_quadratic_equation(CCoeffs x){
-    if(x.a==0){
+    double a = x.get_a();
+    double b = x.get_b();
+    double c = x.get_c();
+    if(a==0){
         exit(1);
     }
-    double delta = x.b*x.b - 4*x.a*x.c;
-    double inv2a = 1/(2*x.a);
+    double delta = b*b - 4*a*c;
+    double inv2a = 1/(2*a);
     if(delta>=0){
-        double sol1 = (-x.b + std::sqrt(delta))*inv2a;
-        double sol2 = (-x.b - std::sqrt(delta))*inv2a;
+        double sol1 = (-b + std::sqrt(delta))*inv2a;
+        double sol2 = (-b - std::sqrt(delta))*inv2a;
         if(delta == 0){
             std::cout<<"The single solution is x = "<<sol1<<std::endl;
             return;
@@ -44,7 +57,7 @@ void solve_quadratic_equation(CCoeffs x){
         std::cout<<"The solutions are x1 = "<<sol1<<", x2 = "<<sol2<<std::endl;
     }
     else {
-        double real = -x.b/inv2a;
+        double real = -b/inv2a;
         double imaginry = std::sqrt(-delta)/inv2a;
         std::cout<<"The solutions are x1 = "<<real<<"+"<<imaginry<<"i,"<<", x2 = "<<real<<"-"<<imaginry<<"i"<<std::endl;
     }

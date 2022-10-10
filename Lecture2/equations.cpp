@@ -10,6 +10,10 @@ public:
         real = 0;
     }
     void print(){
+        if(im == 0){
+            std::cout<<real<<std::endl;
+            return;
+        }
         if(im<0){
             std::cout<<real<<im<<"i"<<std::endl;
             return;
@@ -21,15 +25,21 @@ public:
         im = i;
         return;
     }
+
+    double get_real(){
+        return real;
+    }
+    double get_im(){
+        return im;
+    }
 };
 
 
 class CCoeffs{
-public:
     double a;
     double b;
     double c;
-
+public:
     CCoeffs(){
         a = 0;b = 0;c = 0;
     }
@@ -44,29 +54,43 @@ public:
         return;
     }
 
+    double get_a(){
+        return a;
+    }
+    double get_b(){
+        return b;
+    }
+    double get_c(){
+        return c;
+    }
+
 
 };
 
 class CQuadratic_Equation{
-public:
     CComplex x1;
     CComplex x2;
-    CCoeffs coeffs;
+public:
+    CCoeffs coeffs; //need to be here for the calls eq.coeffs.ask_for_input(); and eq.coeffs.print();
+
 
     void solve(){
-        if(coeffs.a==0){
+        double a = coeffs.get_a();
+        double b = coeffs.get_b();
+        double c = coeffs.get_c();
+        if(a==0){
         exit(1);
         }
-        double delta = coeffs.b*coeffs.b - 4*coeffs.a*coeffs.c;
-        double inv2a = 1/(2*coeffs.a);
+        double delta = b*b - 4*a*c;
+        double inv2a = 1/(2*a);
         if(delta>=0){
-                double x1r = (-coeffs.b + std::sqrt(delta))*inv2a;
-                double x2r = (-coeffs.b - std::sqrt(delta))*inv2a;
+                double x1r = (-b + std::sqrt(delta))*inv2a;
+                double x2r = (-b - std::sqrt(delta))*inv2a;
                 x1.set_value(x1r,0);
                 x2.set_value(x2r,0);
         }
         else {
-            double real = -coeffs.b/inv2a;
+            double real = -b/inv2a;
             double imaginry = std::sqrt(-delta)/inv2a;
             x1.set_value(real,imaginry);
             x2.set_value(real,-imaginry);
@@ -74,7 +98,14 @@ public:
     }
 
     void print_solutions(){
+        if(x1.get_real()==x2.get_real() && x1.get_im() == x2.get_im()){
+            std::cout<<"The equation has only one solution x = ";
+            x1.print();
+            return;
+        }
+        std::cout<<"The equation has two solutions:"<<std::endl<<"x1 = ";
         x1.print();
+        std::cout<<"x2 = ";
         x2.print();
         return;
     }
