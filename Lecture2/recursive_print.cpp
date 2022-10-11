@@ -15,13 +15,13 @@ void recursive_print(int *array, int pos, int size){
 
 
 int main(){
-    std::cout<<"Insert 10 numbers. After each number inserted press enter"<<std::endl;
+    int size{10};
+    std::cout<<"Insert "<<size<<" numbers. After each number inserted press enter"<<std::endl;
     //allocate memory for the array. *arr is a pointer to the array
-    int* arr = (int*)malloc(10*sizeof(int));
-    for(int i = 0;i<10;i++){
+    int *arr = (int*)malloc(size*sizeof(int));
+    for(int i = 0;i<size;i++){
         //Initialize the values of the array. At every step I write the inserted value on memory cell indentified by value arr+i
         std::cin>>*(arr+i);
     }
-    int size{sizeof(arr)};
-    recursive_print(arr,0,10);
+    recursive_print(arr,0,size);
 }
