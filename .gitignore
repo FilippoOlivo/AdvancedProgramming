@@ -1,0 +1,4 @@
+*.x
+*.o
+*.kdev4
+*.DS_Store
