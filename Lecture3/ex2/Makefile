@@ -11,8 +11,8 @@ CFLAGS= -c -l./$(OBJDIR)
 main.x: main.o write_res.o
 	$(CC) main.o write_res.o -o main.x
 write_res.o: write_res.cpp
-	$(CC) $(CFLAGS) write_res.cpp
+	$(CC) $(CFLAGS) write_res.cpp 
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
 clean:
-	rm -rf *.o *.x
+	rm -rf *.o *.x\
