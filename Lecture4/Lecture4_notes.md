@@ -1,4 +1,4 @@
-# Lecture 5
+# Lecture 4
 # Templates
 ```cpp
 int mysum(const int& a, const int& b){
@@ -95,7 +95,8 @@ Template every thing and put everything in .hpp file; that make more easier the 
 ## Class templates 
 I can create a class and said that the type of the variable inside the class are of type T.
 ```cpp
-template CMyClass{
+template <typename T>
+class CMyClass{
 public:
     T field1;
     T field2;
@@ -313,3 +314,4 @@ Some usefull methos for vectors:
 vec.size() //numeber of initialized valued
 vec.capacity() //amount of reserved memory
 ```
+Matrix: don't create a vector-vector than each column/line will live in a different memory allocation (very bad for performance). 
