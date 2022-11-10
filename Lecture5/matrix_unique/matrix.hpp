@@ -12,7 +12,7 @@ public:
     std::unique_ptr<T[]> mat;
 
     CSquareMatrix(){
-        mat = std::make_unique<T[]>(S);;
+        mat = std::make_unique<T[]>(S);
         size = S;
         n = std::sqrt(S);
     }
@@ -34,6 +34,48 @@ public:
         }
         std::cout<<std::endl;
     }
+
+    CSquareMatrix<T,S>& operator=(const CSquareMatrix<T,S>& p){
+        std::cout<<"assignment operator called"<<std::endl;
+        if(this != &p){
+            size = p.size;
+            n = p.n;
+            if(mat != nullptr){
+                delete[] mat;
+                mat = nullptr;
+            }
+
+            if(p.mat ==nullptr)
+            {
+                mat = nullptr;
+            }
+            else
+            {
+                mat = std::unique_ptr<T[]>(S);
+                for(int i = 0; i<size;i++){
+                    mat[i] = p.mat[i];
+                }
+            }
+        }
+        return *this;
+    } //assignment operator
+
+    CSquareMatrix<T,S> (const CSquareMatrix<T,S>& p){
+        std::cout<<"copy constructor called"<<std::endl;
+        if(this != &p){
+            size = p.size;
+            n = p.n;
+            if(mat == nullptr){
+                mat = nullptr;
+            }
+            else{
+                mat = std::make_unique<T[]>(S);
+                for(int i = 0; i<S;i++){
+                    mat[i] = p.mat[i];
+                }
+            }
+        }
+    } //copy costructor
 
     T get_single_value(const int i, const int j){
         //std::cout<<(mat[(i-1)*n+j-1])<<std::endl;

@@ -16,6 +16,69 @@ public:
         n = std::sqrt(S);
     }
 
+    ~CSquareMatrix(){
+        std::cout<<"Destructor is called"<<std::endl;
+        delete[] mat;
+        mat = nullptr;
+        size = 0;
+        n = 0;
+    } //Destructor
+
+    CSquareMatrix<T,S>& operator=(const CSquareMatrix<T,S>& p){
+        std::cout<<"assignment operator called"<<std::endl;
+        if(this != &p){
+            size = p.size;
+            n = p.n;
+            if(mat != nullptr){
+                delete[] mat;
+                mat = nullptr;
+            }
+
+            if(p.mat ==nullptr)
+            {
+                mat = nullptr;
+            }
+            else
+            {
+                mat = mat = new T[S];
+                for(int i = 0; i<size;i++){
+                    mat[i] = p.mat[i];
+                }
+            }
+        }
+        return *this;
+    } //assignment operator
+
+    CSquareMatrix<T,S> (const CSquareMatrix<T,S>& p){
+        std::cout<<"copy constructor called"<<std::endl;
+        if(this != &p){
+            size = p.size;
+            n = p.n;
+            if(mat == nullptr){
+                mat = nullptr;
+            }
+            else{
+                mat = new T[S];
+                for(int i = 0; i<S;i++){
+                    mat[i] = p.mat[i];
+                }
+            }
+        }
+    } //copy costructor
+    
+
+    /*CSquareMatrix<T,S> (const CSquareMatrix<T,S> &p){
+        std::cout<<"move constructor called"<<std::endl;
+        if(this != &p){
+            size = p.size;
+            p.size = 0;
+            mat = p.mat;
+            p.mat = nullptr;
+        }
+    }*/
+
+
+
     void read_from_file(const char *path)
     {
         std::ifstream file(path);
